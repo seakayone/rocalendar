@@ -15,7 +15,7 @@ class Venue {
 		lng()
 	}
 	
-	// static hasMany = [events:Event]
+	static hasMany = [events:Event]
 	String name
 	String street
 	String zip
