@@ -95,12 +95,17 @@ img {
 }
 
 .content {
+	margin: 0.8em 1em 0.3em
 }
 
 .content h1 {
 	border-bottom: 1px solid #CCCCCC;
-	margin: 0.8em 1em 0.3em;
+	
 	padding: 0 0.25em;
+}
+
+.content li {
+	margin-left: 2em;
 }
 
 .scaffold-list h1 {
