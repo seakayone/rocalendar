@@ -20,16 +20,16 @@ class BootStrap {
 		def persons = Person.list() ?: []
 		if (!persons) {
 			def user = new Person(
-					username: 'meUser'
+					username: 'user'
 					, enabled: true
-					, password: 'password'// password: SpringSecurityService.encodePassword('password')
+					, password: 'user'
 					).save(flush: true)
 			SecUserSecRole.create(user, userRole, true)
 
 			def admin = new Person(
-					username: 'meAdmin'
+					username: 'admin'
 					, enabled: true
-					, password: 'password'// password: SpringSecurityService.encodePassword('password')
+					, password: 'admin'
 					).save(flush: true)
 			SecUserSecRole.create(admin, adminRole, true)
 		}
