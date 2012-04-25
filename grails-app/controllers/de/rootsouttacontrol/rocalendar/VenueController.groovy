@@ -7,7 +7,6 @@ import grails.converters.*
 
 class VenueController {
 	def geocoderService
-	def geoIpLookupService
 	
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
