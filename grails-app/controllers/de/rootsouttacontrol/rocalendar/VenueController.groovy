@@ -116,6 +116,7 @@ class VenueController {
     }
 	
 	def map = {
-		[venueList: Venue.list()]
+		def venueInstance = Venue.get(params.id)
+		[venueList: venueInstance]
 	}
 }
