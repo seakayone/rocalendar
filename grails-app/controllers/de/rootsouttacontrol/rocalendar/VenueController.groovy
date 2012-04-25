@@ -1,9 +1,14 @@
 package de.rootsouttacontrol.rocalendar
 
+import javax.tools.JavaFileManager.Location;
+
 import org.springframework.dao.DataIntegrityViolationException
+import grails.converters.*
 
 class VenueController {
-
+	def geocoderService
+	def geoIpLookupService
+	
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
@@ -20,7 +25,9 @@ class VenueController {
     }
 
     def save() {
-        def venueInstance = new Venue(params)
+		def venueLocation = geocoderService.geocodeVenue(params.street, params.city, params.state, params.country)
+		
+        def venueInstance = new Venue(params + venueLocation)
         if (!venueInstance.save(flush: true)) {
             render(view: "create", model: [venueInstance: venueInstance])
             return
@@ -70,8 +77,9 @@ class VenueController {
                 return
             }
         }
-
-        venueInstance.properties = params
+		
+		def venueLocation = geocoderService.geocodeVenue(params.street, params.city, params.state, params.country)
+        venueInstance.properties = params + venueLocation
 
         if (!venueInstance.save(flush: true)) {
             render(view: "edit", model: [venueInstance: venueInstance])
@@ -100,4 +108,8 @@ class VenueController {
             redirect(action: "show", id: params.id)
         }
     }
+	
+	def map = {
+		[venueList: Venue.list()]
+	}
 }
