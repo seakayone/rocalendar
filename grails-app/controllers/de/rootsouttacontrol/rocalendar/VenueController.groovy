@@ -1,9 +1,15 @@
 package de.rootsouttacontrol.rocalendar
 
+import javax.tools.JavaFileManager.Location;
+import grails.plugins.springsecurity.Secured
+
+
 import org.springframework.dao.DataIntegrityViolationException
+import grails.converters.*
 
 class VenueController {
-
+	def geocoderService
+	
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
@@ -14,13 +20,17 @@ class VenueController {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [venueInstanceList: Venue.list(params), venueInstanceTotal: Venue.count()]
     }
-
+	
+	@Secured(['IS_AUTHENTICATED_REMEMBERED'])
     def create() {
         [venueInstance: new Venue(params)]
     }
-
+	
+	@Secured(['IS_AUTHENTICATED_REMEMBERED'])
     def save() {
-        def venueInstance = new Venue(params)
+		def venueLocation = geocoderService.geocodeVenue(params.street, params.city, params.state, params.country)
+		
+        def venueInstance = new Venue(params + venueLocation)
         if (!venueInstance.save(flush: true)) {
             render(view: "create", model: [venueInstance: venueInstance])
             return
@@ -40,7 +50,8 @@ class VenueController {
 
         [venueInstance: venueInstance]
     }
-
+	
+	@Secured(['IS_AUTHENTICATED_REMEMBERED'])
     def edit() {
         def venueInstance = Venue.get(params.id)
         if (!venueInstance) {
@@ -51,7 +62,8 @@ class VenueController {
 
         [venueInstance: venueInstance]
     }
-
+	
+	@Secured(['IS_AUTHENTICATED_REMEMBERED'])
     def update() {
         def venueInstance = Venue.get(params.id)
         if (!venueInstance) {
@@ -70,8 +82,9 @@ class VenueController {
                 return
             }
         }
-
-        venueInstance.properties = params
+		
+		def venueLocation = geocoderService.geocodeVenue(params.street, params.city, params.state, params.country)
+        venueInstance.properties = params + venueLocation
 
         if (!venueInstance.save(flush: true)) {
             render(view: "edit", model: [venueInstance: venueInstance])
@@ -81,7 +94,8 @@ class VenueController {
 		flash.message = message(code: 'default.updated.message', args: [message(code: 'venue.label', default: 'Venue'), venueInstance.id])
         redirect(action: "show", id: venueInstance.id)
     }
-
+	
+	@Secured(['IS_AUTHENTICATED_REMEMBERED'])
     def delete() {
         def venueInstance = Venue.get(params.id)
         if (!venueInstance) {
@@ -100,4 +114,9 @@ class VenueController {
             redirect(action: "show", id: params.id)
         }
     }
+	
+	def map = {
+		def venueInstance = Venue.get(params.id)
+		[venueList: venueInstance]
+	}
 }

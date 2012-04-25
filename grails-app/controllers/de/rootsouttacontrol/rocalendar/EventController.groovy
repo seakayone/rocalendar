@@ -1,6 +1,8 @@
 package de.rootsouttacontrol.rocalendar
 
 import org.springframework.dao.DataIntegrityViolationException
+import grails.plugins.springsecurity.Secured
+
 
 class EventController {
 
@@ -14,11 +16,13 @@ class EventController {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [eventInstanceList: Event.list(params), eventInstanceTotal: Event.count()]
     }
-
+	
+	@Secured(['IS_AUTHENTICATED_REMEMBERED'])
     def create() {
         [eventInstance: new Event(params)]
     }
-
+	
+	@Secured(['IS_AUTHENTICATED_REMEMBERED'])
     def save() {
         def eventInstance = new Event(params)
         if (!eventInstance.save(flush: true)) {
@@ -40,7 +44,8 @@ class EventController {
 
         [eventInstance: eventInstance]
     }
-
+	
+	@Secured(['IS_AUTHENTICATED_REMEMBERED'])
     def edit() {
         def eventInstance = Event.get(params.id)
         if (!eventInstance) {
@@ -51,7 +56,8 @@ class EventController {
 
         [eventInstance: eventInstance]
     }
-
+	
+	@Secured(['IS_AUTHENTICATED_REMEMBERED'])
     def update() {
         def eventInstance = Event.get(params.id)
         if (!eventInstance) {
@@ -81,7 +87,8 @@ class EventController {
 		flash.message = message(code: 'default.updated.message', args: [message(code: 'event.label', default: 'Event'), eventInstance.id])
         redirect(action: "show", id: eventInstance.id)
     }
-
+	
+	@Secured(['IS_AUTHENTICATED_REMEMBERED'])
     def delete() {
         def eventInstance = Event.get(params.id)
         if (!eventInstance) {
