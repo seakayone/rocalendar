@@ -1,6 +1,8 @@
 package de.rootsouttacontrol.rocalendar
 
 import javax.tools.JavaFileManager.Location;
+import grails.plugins.springsecurity.Secured
+
 
 import org.springframework.dao.DataIntegrityViolationException
 import grails.converters.*
@@ -18,11 +20,13 @@ class VenueController {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [venueInstanceList: Venue.list(params), venueInstanceTotal: Venue.count()]
     }
-
+	
+	@Secured(['IS_AUTHENTICATED_REMEMBERED'])
     def create() {
         [venueInstance: new Venue(params)]
     }
-
+	
+	@Secured(['IS_AUTHENTICATED_REMEMBERED'])
     def save() {
 		def venueLocation = geocoderService.geocodeVenue(params.street, params.city, params.state, params.country)
 		
@@ -46,7 +50,8 @@ class VenueController {
 
         [venueInstance: venueInstance]
     }
-
+	
+	@Secured(['IS_AUTHENTICATED_REMEMBERED'])
     def edit() {
         def venueInstance = Venue.get(params.id)
         if (!venueInstance) {
@@ -57,7 +62,8 @@ class VenueController {
 
         [venueInstance: venueInstance]
     }
-
+	
+	@Secured(['IS_AUTHENTICATED_REMEMBERED'])
     def update() {
         def venueInstance = Venue.get(params.id)
         if (!venueInstance) {
@@ -88,7 +94,8 @@ class VenueController {
 		flash.message = message(code: 'default.updated.message', args: [message(code: 'venue.label', default: 'Venue'), venueInstance.id])
         redirect(action: "show", id: venueInstance.id)
     }
-
+	
+	@Secured(['IS_AUTHENTICATED_REMEMBERED'])
     def delete() {
         def venueInstance = Venue.get(params.id)
         if (!venueInstance) {
