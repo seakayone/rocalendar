@@ -7,7 +7,7 @@
 	value="${message(code: 'event.label', default: 'Event')}" />
 <g:set var="entityVenueName"
 	value="${message(code: 'venue.label', default: 'Venue')}" />
-<title><g:message code="default.show.label" args="[entityName]" /></title>
+<title>Home</title>
 </head>
 <body>
 
