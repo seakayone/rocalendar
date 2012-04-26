@@ -10,27 +10,45 @@
 	<script 
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" 
 		type="text/javascript"></script>
-	<script
-		src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAA8LnR1umHYPuGexe-I0R_xhSEedscTwuAx4hZn6EjUEEnMd4RXhR2SD6gDMXQfL-9KjBJ_L7KPjClQQ"
-		type="text/javascript"></script>
+
 	<script type="text/javascript">
 	    //<![CDATA[
-	    function load() {
-	      if (GBrowserIsCompatible()) {
-	        var map = new GMap2(document.getElementById("map"));
-	        map.setCenter(new GLatLng(${venue.lat}, ${venue.lng}), 13);
-	 		map.addControl(new GLargeMapControl());
-	    	map.addControl(new GMapTypeControl()); 
+	    function initializeMap() {
+
+			var venueLatLng = new google.maps.LatLng(${venue.lat}, ${venue.lng});
+
+			var myOptions = {
+				    zoom: 13
+				    , center: venueLatLng
+				    , mapTypeId: google.maps.MapTypeId.HYBRID
+			}
+	        var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+			var contentString = '<div><h1>${venue.name}</h1><p>${venue.street}, ${venue.city}</p><p>${venue.description}</p></div>';
+         	var infowindow = new google.maps.InfoWindow({
+         	    content: contentString
+         	});
+
+         	var marker = new google.maps.Marker({
+         	    position: venueLatLng,
+         	    map: map,
+         	    title: '${venue.name}'
+         	});
+
+         	google.maps.event.addListener(marker, 'click', function() {
+         	  infowindow.open(map,marker);
+         	});
 	
-         	var point${venue.id} = new GLatLng(${venue.lat}, ${venue.lng})
-      		var marker${venue.id} = new GMarker(point${venue.id})
-      		marker${venue.id}.bindInfoWindowHtml("<strong>${venue.name}</strong><br/>${venue.street}<br>")
-         	map.addOverlay(marker${venue.id})
-	      }
 	    }
+	    function loadGoogleMapsApi() {
+	    	  var script = document.createElement("script");
+	    	  script.type = "text/javascript";
+	    	  script.src = "http://maps.googleapis.com/maps/api/js?key=AIzaSyCrLr_bPa4jdyklguH1OdJk_UPqrvjnwVw&sensor=false&callback=initializeMap";
+	    	  document.body.appendChild(script);
+	    	}
+    	
 	    $(document).ready(function(){
-			//insert code here
-			load();
+			loadGoogleMapsApi();
 		});
 	    //]]>
     </script>
@@ -48,7 +66,7 @@
 	</div>
 
 	<div class="content">
-		<div id="map" style="width: 930px; height: 600px"></div>
+		<div id="map_canvas" style="width: 930px; height: 600px"></div>
 	</div>
 </body>
 </html>
