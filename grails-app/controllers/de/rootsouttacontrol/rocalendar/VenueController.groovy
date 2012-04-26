@@ -118,4 +118,10 @@ class VenueController {
 	def map = {
 		[venue: Venue.get(params.id)]
 	}
+	
+	def mapall = {
+		def venueList = Venue.findAll()
+		def location = venueList.getAt(0)
+		[venueList: Venue.findAll(), location: location]
+	}
 }
