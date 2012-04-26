@@ -18,9 +18,9 @@
 			var venueLatLng = new google.maps.LatLng(${venue.lat}, ${venue.lng});
 
 			var myOptions = {
-				    zoom: 13
+				    zoom: 17
 				    , center: venueLatLng
-				    , mapTypeId: google.maps.MapTypeId.HYBRID
+				    , mapTypeId: google.maps.MapTypeId.ROADMAP
 			}
 	        var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 

@@ -21,7 +21,7 @@
 			var myOptions = {
 				    zoom: 13
 				    , center: mapCenterLatLng
-				    , mapTypeId: google.maps.MapTypeId.HYBRID
+				    , mapTypeId: google.maps.MapTypeId.ROADMAP
 			}
 	        var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
