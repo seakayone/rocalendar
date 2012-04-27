@@ -42,8 +42,7 @@
 			<ul>
 				<g:each in="${latestEvents}" var="c">
 					<li>
-						${c.startDate} ${c.name}
-					</li>
+						${c.startDate.format('d.M.yyyy')} - ${c.name}
 				</g:each>
 			</ul>
 		</div>
@@ -53,7 +52,7 @@
 			<ul>
 				<g:each in="${latestVenues}" var="c">
 					<li>
-						${c.toString()}
+						${c.name} - ${c.city} 
 					</li>
 				</g:each>
 			</ul>
