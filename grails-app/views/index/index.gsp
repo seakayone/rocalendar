@@ -38,6 +38,17 @@
 		</div>
 		
 		<div>
+			<h1>Anstehende Veranstaltungen der kommenden 14 Tage	</h1>
+			<ul>
+				<g:each in="${upcomingEvents}" var="c">
+					<li>
+						${c.startDate.format('d.M.yyyy')} - ${c.name}
+					</li>
+				</g:each>
+			</ul>
+		</div>
+		
+		<div>
 			<h1>Neuste Veranstaltungen</h1>
 			<ul>
 				<g:each in="${latestEvents}" var="c">
