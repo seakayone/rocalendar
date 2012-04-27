@@ -1,46 +1,41 @@
-
 <%@ page import="de.rootsouttacontrol.rocalendar.Event"%>
 <!doctype html>
 <html>
 <head>
 <meta name="layout" content="main">
-<g:set var="entityVenueName"
-	value="${message(code: 'venue.label', default: 'Venue')}" />
+<g:set var="entityVenueName" value="${message(code: 'venue.label', default: 'Venue')}" />
 <title><g:message code="default.show.label" args="[entityVenueName]" /></title>
+
 	<script 
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" 
 		type="text/javascript"></script>
-
 	<script type="text/javascript">
 	    //<![CDATA[
 	    function initializeMap() {
-
-			var venueLatLng = new google.maps.LatLng(${venue.lat}, ${venue.lng});
-
-			var myOptions = {
+			var mapOptions = {
 				    zoom: 17
-				    , center: venueLatLng
+				    , center: new google.maps.LatLng(${venue.lat}, ${venue.lng})
 				    , mapTypeId: google.maps.MapTypeId.ROADMAP
 			}
-	        var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-
-			var contentString = '<div><h1>${venue.name}</h1><p>${venue.street}, ${venue.city}</p><p>${venue.description}</p></div>';
-         	var infowindow = new google.maps.InfoWindow({
-         	    content: contentString
-         	});
-
-         	var marker = new google.maps.Marker({
-         	    position: venueLatLng,
-         	    map: map,
-         	    title: '${venue.name}'
-         	});
-
-         	google.maps.event.addListener(marker, 'click', function() {
-         	  infowindow.open(map,marker);
-         	});
-         	infowindow.open(map,marker);
-	
+	        var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+			addMarkerToMap(map);
 	    }
+	    
+	    function addMarkerToMap(map){
+         	var infowindow = new google.maps.InfoWindow({
+         	    content: '<div><h1>${venue.name}</h1><p>${venue.street}, ${venue.city}</p><p>${venue.description}</p></div>'
+         	});
+         	var marker = new google.maps.Marker({
+         	    position: new google.maps.LatLng(${venue.lat}, ${venue.lng})
+     	    	, map: map
+     	    	, title: '${venue.name}'
+         	});
+         	google.maps.event.addListener(marker, 'click', function() {
+           	  infowindow.open(map,marker);
+           	});
+           	infowindow.open(map,marker);
+		}
+	    
 	    function loadGoogleMapsApi() {
 	    	  var script = document.createElement("script");
 	    	  script.type = "text/javascript";
@@ -48,7 +43,7 @@
 	    	  document.body.appendChild(script);
 	    	}
     	
-	    $(document).ready(function(){
+	    $('#map_canvas').ready(function(){
 			loadGoogleMapsApi();
 		});
 	    //]]>
