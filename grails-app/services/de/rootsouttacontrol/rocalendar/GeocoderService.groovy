@@ -6,7 +6,7 @@ class GeocoderService {
 
     boolean transactional = false
 
-    def geocodeVenue(String street, String city, String state, String country) {
+    def geocode(String street, String city, String state, String country) {
 	
 		def result = [:]
 		def base = 'http://maps.google.com/maps/api/geocode/xml?'

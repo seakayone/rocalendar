@@ -28,7 +28,7 @@ class VenueController {
 	
 	@Secured(['IS_AUTHENTICATED_REMEMBERED'])
     def save() {
-		def venueLocation = geocoderService.geocodeVenue(params.street, params.city, params.state, params.country)
+		def venueLocation = geocoderService.geocode(params.street, params.city, params.state, params.country)
 		
         def venueInstance = new Venue(params + venueLocation)
         if (!venueInstance.save(flush: true)) {
@@ -83,7 +83,7 @@ class VenueController {
             }
         }
 		
-		def venueLocation = geocoderService.geocodeVenue(params.street, params.city, params.state, params.country)
+		def venueLocation = geocoderService.geocode(params.street, params.city, params.state, params.country)
         venueInstance.properties = params + venueLocation
 
         if (!venueInstance.save(flush: true)) {
