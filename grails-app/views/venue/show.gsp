@@ -95,25 +95,7 @@
 					
 				</li>
 				</g:if>
-			
-				<g:if test="${venueInstance?.lat}">
-				<li class="fieldcontain">
-					<span id="lat-label" class="property-label"><g:message code="venue.lat.label" default="Lat" /></span>
-					
-						<span class="property-value" aria-labelledby="lat-label"><g:fieldValue bean="${venueInstance}" field="lat"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${venueInstance?.lng}">
-				<li class="fieldcontain">
-					<span id="lng-label" class="property-label"><g:message code="venue.lng.label" default="Lng" /></span>
-					
-						<span class="property-value" aria-labelledby="lng-label"><g:fieldValue bean="${venueInstance}" field="lng"/></span>
-					
-				</li>
-				</g:if>
-			
+						
 				<g:if test="${venueInstance?.events}">
 				<li class="fieldcontain">
 					<span id="events-label" class="property-label"><g:message code="venue.events.label" default="Events" /></span>
