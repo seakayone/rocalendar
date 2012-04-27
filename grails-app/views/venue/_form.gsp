@@ -66,22 +66,6 @@
 	<g:textArea name="description" cols="40" rows="5" maxlength="1500" value="${venueInstance?.description}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: venueInstance, field: 'lat', 'error')} ">
-	<label for="lat">
-		<g:message code="venue.lat.label" default="Lat" />
-		
-	</label>
-	<g:textField name="lat" value="${venueInstance?.lat}"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: venueInstance, field: 'lng', 'error')} ">
-	<label for="lng">
-		<g:message code="venue.lng.label" default="Lng" />
-		
-	</label>
-	<g:textField name="lng" value="${venueInstance?.lng}"/>
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: venueInstance, field: 'events', 'error')} ">
 	<label for="events">
 		<g:message code="venue.events.label" default="Events" />

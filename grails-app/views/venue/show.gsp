@@ -95,7 +95,7 @@
 					
 				</li>
 				</g:if>
-						
+			
 				<g:if test="${venueInstance?.events}">
 				<li class="fieldcontain">
 					<span id="events-label" class="property-label"><g:message code="venue.events.label" default="Events" /></span>
