@@ -43,6 +43,7 @@
 				<g:each in="${latestEvents}" var="c">
 					<li>
 						${c.startDate.format('d.M.yyyy')} - ${c.name}
+					</li>
 				</g:each>
 			</ul>
 		</div>

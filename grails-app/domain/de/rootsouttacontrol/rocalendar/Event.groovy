@@ -9,8 +9,8 @@ class Event {
 			validator:{val, obj->
 			return val.after(obj.startDate)})
 		description(blank:true, maxSize:1500)
-		entryFee()
-		filenameFlyer(blank:true, nullable:true)
+		entryFee(blank:true)
+		filenameFlyer(blank:true)
     }
 
    	Date dateCreated
@@ -26,5 +26,4 @@ class Event {
 	String toString() {
                 "${name}"
         }
-
 }
