@@ -1,5 +1,7 @@
 package de.rootsouttacontrol.rocalendar
 
+
+
 class GeocoderService {
 
     boolean transactional = false
@@ -12,17 +14,8 @@ class GeocoderService {
 		def url = base + params.collect { k,v -> "$k=$v" }.join('&')
 		def response = new XmlSlurper().parse(url)
 
-		result.lat = response.result.geometry.location.lat.text()
-		result.lng = response.result.geometry.location.lng.text()
-
-		//	assert Math.abs(-74.0059729 - result.lat.toDouble()) < 0.0001
-		//	assert Math.abs(-74.0059729 - result.lng.toDouble()) < 0.0001
-		// debug
-		//result.street = street
-		//result.city = city
-		//result.state = state
-		//result.country = country
-		//result.url = url
+		result.lat = response.result.geometry.location.lat.text().split('\\.')[0,1].join('.')
+		result.lng = response.result.geometry.location.lng.text().split('\\.')[0,1].join('.')
 
 		return result 
 
