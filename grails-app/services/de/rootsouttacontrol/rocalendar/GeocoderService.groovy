@@ -12,8 +12,8 @@ class GeocoderService {
 		def url = base + params.collect { k,v -> "$k=$v" }.join('&')
 		def response = new XmlSlurper().parse(url)
 
-		result.lat = response.result.geometry.location.lat.text()
-		result.lng = response.result.geometry.location.lng.text()
+		result.lat = response.result.geometry.location.lat.text().substring(0, 10)
+		result.lng = response.result.geometry.location.lng.text().substring(0, 10)
 
 		//	assert Math.abs(-74.0059729 - result.lat.toDouble()) < 0.0001
 		//	assert Math.abs(-74.0059729 - result.lng.toDouble()) < 0.0001
