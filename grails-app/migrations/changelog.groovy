@@ -331,4 +331,6 @@ databaseChangeLog = {
 	changeSet(author: "christian (generated)", id: "1335554837686-26") {
 		createSequence(sequenceName: "hibernate_sequence")
 	}
+
+	include file: 'add-date-last-update-create-to-venue.groovy'
 }
