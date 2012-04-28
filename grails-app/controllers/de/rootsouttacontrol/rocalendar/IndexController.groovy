@@ -5,17 +5,23 @@ import de.rootsouttacontrol.rocalendar.Event
 class IndexController {
 
 	def index = {
-		def allEvents = getLatestEvents()
-		def allVenues = getLatestVenues()
-		[latestEvents: allEvents, latestVenues: allVenues]
+		[
+			latestEvents: getLatestEvents()
+			, latestVenues: getLatestVenues()
+			, upcomingEvents: getUpcomingEvents()
+		]
 	}
 
 	private getLatestEvents() {
-		def allEvents = Event.findAll()
+		return Event.listOrderByDateCreated(max: 5, order: "desc");
 	}
 	
 	private getLatestVenues() {
-		def allVenues = Venue.findAll()
+		return Venue.listOrderByDateCreated(max: 5, order: "desc");
+	}
+	
+	private getUpcomingEvents() {
+		def upcomingEvents = Event.findAllByStartDateBetween(new Date(), new Date() + 14, [max: 5, sort: "startDate", order: "asc"])
 	}
 
 }

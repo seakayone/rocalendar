@@ -1,8 +1,18 @@
 package de.rootsouttacontrol.rocalendar
 
 class Event {
-
-    static constraints = {
+	
+	static belongsTo = [venue:Venue]
+   	Date dateCreated
+  	Date lastUpdated	
+	String name
+	Date startDate
+	Date endDate
+	String description
+	String entryFee
+	String filenameFlyer
+	
+	static constraints = {
 		name(blank:false, maxSize:100)
 		startDate(attributes:[precision:"minute"])
 		endDate(attributes:[precision:"minute"],
@@ -11,18 +21,8 @@ class Event {
 		description(blank:true, maxSize:1500)
 		entryFee(blank:true)
 		filenameFlyer(blank:true)
-    }
-
-   	Date dateCreated
-  	Date lastUpdated	
-	static belongsTo = [venue:Venue]
-	String name
-	Date startDate
-	Date endDate
-	String description
-	String entryFee
-	String filenameFlyer
-
+	}
+	
 	String toString() {
                 "${name}"
         }
