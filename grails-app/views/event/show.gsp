@@ -70,6 +70,10 @@
 			
 				<g:if test="${eventInstance?.filenameFlyer}">
 				<li class="fieldcontain">
+					 <img src="${createLinkTo(dir:'user-upload/',
+														   file:''+eventInstance.filenameFlyer)}"
+									   alt="${eventInstance.filenameFlyer}"
+									   title="${eventInstance.filenameFlyer}" />
 					<span id="filenameFlyer-label" class="property-label"><g:message code="event.filenameFlyer.label" default="Filename Flyer" /></span>
 					
 						<span class="property-value" aria-labelledby="filenameFlyer-label"><g:fieldValue bean="${eventInstance}" field="filenameFlyer"/></span>

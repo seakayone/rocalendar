@@ -11,7 +11,6 @@ class FileUploadService {
 
         def storagePath = createStoragePathDirectory(destinationDirectory)
 
-        // Store file
         if (!file.isEmpty()) {
             file.transferTo(new File("${storagePath}/${name}"))
             println "Saved file: ${storagePath}/${name}"

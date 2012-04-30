@@ -1,11 +1,14 @@
 package de.rootsouttacontrol.rocalendar
 
 import org.springframework.dao.DataIntegrityViolationException
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 import grails.plugins.springsecurity.Secured
 
 
 class EventController {
 
+    def fileUploadService
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
@@ -25,6 +28,21 @@ class EventController {
 	@Secured(['IS_AUTHENTICATED_REMEMBERED'])
     def save() {
         def eventInstance = new Event(params)
+		
+		def uploadedFile = request.getFile("flyerupload")
+		if (!uploadedFile.empty) {
+			println "Class: ${uploadedFile.class}"
+			println "Name: ${uploadedFile.name}"
+			println "OriginalFileName: ${uploadedFile.originalFilename}"
+			println "Size: ${uploadedFile.size}"
+			println "ContentType: ${uploadedFile.contentType}"
+			
+			def date = new Date()
+			String filename = date.format("yyyyMMddHHmmss") + uploadedFile.originalFilename
+			fileUploadService.uploadFile(uploadedFile, filename, "user-upload")
+			eventInstance.filenameFlyer = filename
+		}
+		
         if (!eventInstance.save(flush: true)) {
             render(view: "create", model: [eventInstance: eventInstance])
             return

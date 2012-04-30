@@ -17,5 +17,6 @@ stacktrace.log
 target
 /plugins
 /web-app/plugins
+/web-app/user-upload
 /web-app/WEB-INF/classes
 /target-eclipse/*
