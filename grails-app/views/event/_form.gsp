@@ -45,9 +45,9 @@
 <div class="fieldcontain ${hasErrors(bean: eventInstance, field: 'filenameFlyer', 'error')} ">
 	<label for="filenameFlyer">
 		<g:message code="event.filenameFlyer.label" default="Filename Flyer" />
-		
 	</label>
 	<g:textField name="filenameFlyer" value="${eventInstance?.filenameFlyer}"/>
+	<input type="file" id="flyerupload" name="flyerupload"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: eventInstance, field: 'venue', 'error')} required">

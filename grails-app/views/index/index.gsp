@@ -10,7 +10,6 @@
 <title>Home</title>
 </head>
 <body>
-	Test
 	<div class="nav" role="navigation">
 		<ul>
 			<li><a class="home" href="${createLink(uri: '/')}"><g:message
