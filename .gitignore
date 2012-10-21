@@ -20,3 +20,7 @@ target
 /web-app/user-upload
 /web-app/WEB-INF/classes
 /target-eclipse/*
+*~
+.classpath
+.project
+.metadata/
