@@ -13,6 +13,7 @@ import de.rootsouttacontrol.rocalendar.PersonController;
 @TestFor(PersonController)
 class PersonControllerTests {
 
+	@Ignore
     void testSomething() {
        fail "Implement me"
     }

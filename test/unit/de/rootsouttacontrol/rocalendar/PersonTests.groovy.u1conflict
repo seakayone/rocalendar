@@ -5,16 +5,20 @@ package de.rootsouttacontrol.rocalendar
 import grails.test.mixin.*
 import org.junit.*
 
-import de.rootsouttacontrol.rocalendar.Profile;
+import de.rootsouttacontrol.rocalendar.Person;
 
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
-@TestFor(Profile)
-class ProfileTests {
+@TestFor(Person)
+class PersonTests {
 
-	@Ignore
-    void testSomething() {
-       fail "Implement me"
-    }
+	protected void setUp() {
+		super.setUp()
+	}
+	
+	protected void tearDown() {
+		super.tearDown()
+	}
+
 }

@@ -5,6 +5,6 @@ class Profile {
 	String email
 	
     static constraints = {
-	email(unique: true)
+		email(unique: true)
     }
 }
